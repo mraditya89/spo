@@ -22,14 +22,13 @@ clear
 % 12. Page 7 No 8
 
 kasus       = 10 ;
-
 %% Data Algoritma
-m_cluster   = 1000; %Number of search point
+m_cluster   = 2000; %Number of search point
 gamma       = 0.1;  %Cut off Parameter for function Fx
 k_cluster   = 20;   %Maximum number of iteration at the clustering phase
-theta       = 30;   %Spiral rotation
+theta       = 180/4;   %Spiral rotation
 r           = 0.95;  %Spiral ratio
-m           = 100;  %Number of search point
+m           = 50;  %Number of search point
 k_max       = 50;  %Number of iteration
 epsilon     = 10^-5;%Parameter of root acceptance
 delta       = 0.01;  %Parameter to distinguish between root
@@ -63,4 +62,26 @@ for i=1:row
 end
 toc
 
-root
+
+[row, col] = size(root);
+
+root;
+sorting_root=[];
+for i=1:row
+    temp_root = sort(root(i,:));
+    if i==1
+        sorting_root = [sorting_root; temp_root];
+        m_sorting = 1;
+    else
+        for j=1:m_sorting
+            if sorting_root(j,:) == temp_root;
+                break;
+            else
+                sorting_root = [sorting_root; temp_root];
+                m_sorting =m_sorting+1;
+                break;
+            end
+        end
+    end    
+end
+sorting_root;
